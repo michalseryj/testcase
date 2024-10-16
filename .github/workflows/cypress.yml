@@ -1,25 +1,13 @@
-name: Cypress Tests
-
-on:
-  workflow_dispatch: # This allows you to trigger the workflow manually
-
+name: End-to-end tests
+on: [push]
 jobs:
-  cypress:
-    runs-on: ubuntu-latest
+  cypress-run:
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '22.9.0'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install Cypress
-        run: npx cypress install
-
-      - name: Run Cypress tests
-        run: npx cypress run
+      - name: Checkout
+        uses: actions/checkout@v3
+      # Install NPM dependencies, cache them correctly
+      # and run all Cypress tests
+      # https://github.com/cypress-io/github-action
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
