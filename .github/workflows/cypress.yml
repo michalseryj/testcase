@@ -1,12 +1,11 @@
 name: Cypress Tests
 
 on:
-  workflow_dispatch: # This allows you to run the pipeline manually
+  workflow_dispatch: # This allows you to trigger the workflow manually
 
 jobs:
-  cypress-run:
+  cypress:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -14,10 +13,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '22.9.0'  # Your Node.js version
+          node-version: '22.9.0'
 
       - name: Install dependencies
         run: npm install
+
+      - name: Install Cypress
+        run: npx cypress install
 
       - name: Run Cypress tests
         run: npx cypress run
