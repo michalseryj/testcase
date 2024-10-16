@@ -1,25 +1,19 @@
-name: CI
-on: push
+name: E2E on Chrome
+
+on: [push]
 
 jobs:
- cypress-run:
-   runs-on: ubuntu-latest
-   steps:
-     - name: Checkout
-       uses: actions/checkout@v3
-     - name: Setup Node.js
-       uses: actions/setup-node@v3
-       with:
-        node-version: 18
-     - name: Install dependencies
-       run: npm install
-       working-directory: ./front-end
-     - name: Cypress run
-       uses: cypress-io/github-action@v5
-       with:
-        working-directory: ./front-end
-        build: npm run build
-        start: npm start
-        wait-on: http://127.0.0.1:3000
-        wait-on-timeout: 180
-        browser: chrome
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v3
+        with:
+          project: ./site
+          browser: chrome
+          build: yarn build
+          start: yarn start
+          wait-on: "http://localhost:3000"
