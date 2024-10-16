@@ -11,7 +11,7 @@ on:
 
 jobs:
   cypress:
-    runs-on: ubuntu-latest  # You can change this to your preferred OS
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
