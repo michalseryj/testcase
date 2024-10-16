@@ -16,6 +16,10 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+beforeEach(() => {
+    cy.viewport(1280, 720); // Set viewport size globally before each test
+  });
+
 Cypress.on('uncaught:exception', (err, runnable) => {
     // Prevent Cypress from failing the test on this error
     return false; 
