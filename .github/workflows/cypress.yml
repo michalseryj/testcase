@@ -1,50 +1,17 @@
 name: Cypress Tests
 
-on:
-  push:
-    branches:
-      - main  # Change this to your default branch
-  pull_request:
-    branches:
-      - main  # Change this to your default branch
-  workflow_dispatch:  # Allows manual trigger from Actions tab
+on: push
 
 jobs:
-  cypress:
-    runs-on: macos-latest
-
+  cypress-run:
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3  # Updated to v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3  # Updated to v3
+      - name: Checkout
+        uses: actions/checkout@v4
+      # Install npm dependencies, cache them correctly
+      # and run all Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
         with:
-          node-version: '22.9.0'  # Specify your Node.js version
-
-      - name: Cache Cypress binary
-        uses: actions/cache@v3  # Use caching action
-        with:
-          path: ~/.cache/Cypress  # Cache Cypress binary
-          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}  # Cache key based on OS and package lock
-          restore-keys: |
-            ${{ runner.os }}-cypress-
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install Cypress binary
-        run: npx cypress install  # Install Cypress binary if missing
-
-      - name: Run Cypress tests
-        env:
-          TERM: xterm  # Setting TERM environment variable
-        run: npx cypress run --headed --no-sandbox --browser chrome --reporter spec
-
-      - name: Upload Screenshots and Videos
-        uses: actions/upload-artifact@v3  # Updated to v3
-        with:
-          name: cypress-artifacts
-          path: |
-            cypress/screenshots/
-            cypress/videos/
+          build: npm run build
+          start: npm start
