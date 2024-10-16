@@ -35,7 +35,7 @@ jobs:
             ${{ runner.os }}-cypress
 
       - name: Run Cypress Tests
-        run: npx cypress run --headless --browser chrome
+        run: npx cypress run --headless --browser chrome --no-sandbox
 
       - name: Upload Cypress Videos
         uses: actions/upload-artifact@v3
