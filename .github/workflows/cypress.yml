@@ -22,10 +22,16 @@ jobs:
         with:
           node-version: '22.9.0'  # Specify your Node.js version
 
+      - name: Cache Cypress binary
+        uses: actions/cache@v3  # Use caching action
+        with:
+          path: ~/.cache/Cypress  # Cache Cypress binary
+          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}  # Cache key based on OS and package lock
+          restore-keys: |
+            ${{ runner.os }}-cypress-
+
       - name: Install dependencies
-        run: |
-          npm install
-          npm install cypress --save-dev  # Ensure Cypress is installed
+        run: npm install
 
       - name: Run Cypress Tests
         run: npx cypress run --browser chrome  # Use Chrome instead of Electron
