@@ -13,7 +13,11 @@ describe('Purchase process tests', () => {
     beforeEach(() => {
         cy.visit('/');
         homePage.acceptCookies();
+        cy.intercept('POST', 'https://www.datart.cz/').as('loginApi');
         homePage.login();
+        cy.wait('@loginApi').then((interception) => {
+          // Assert that the response status is 200
+          expect(interception.response.statusCode).to.equal(200)});
       });
 
   it('Tests the whole purchase process happy path', () => {
