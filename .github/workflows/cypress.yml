@@ -19,7 +19,7 @@ jobs:
         run: npm ci
 
       - name: Run Cypress tests in Chrome
-        run: npx cypress run --browser chrome
+        run: xvfb-run cypress run --headed --browser chrome
         env:
           TERM: xterm
           # Include Chrome's specific environment flags for CI
