@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Updated to v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3  # Updated to v3
         with:
           node-version: '22.9.0'  # Specify your Node.js version
 
@@ -31,7 +31,7 @@ jobs:
         run: npx cypress run --browser chrome  # Use Chrome instead of Electron
 
       - name: Upload Screenshots and Videos
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Updated to v3
         with:
           name: cypress-artifacts
           path: |
