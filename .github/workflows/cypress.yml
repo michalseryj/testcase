@@ -1,50 +1,19 @@
-name: Cypress Tests
-
+name: Cypress tests
 on:
-  workflow_dispatch:
-  pull_request:
   push:
     branches:
       - main
-
 jobs:
-  test:
+  Cypress-Test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout GitCode
         uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '22.x'
-
       - name: Install dependencies
-        run: npm ci
-
-      - name: Install Cypress
-        run: npm install cypress
-
-      - name: Cache Cypress binary
-        uses: actions/cache@v2
+        run: sudo apt-get install -y upower  # Corrected indentation
+      - name: Run Cypress Test
+        uses: cypress-io/github-action@v4
         with:
-          path: ~/.cache/Cypress
-          key: ${{ runner.os }}-cypress-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-cypress
+          command: npx cypress run
+          browser: chrome
 
-      - name: Run Cypress Tests
-        run: npx cypress run --headless --browser chrome
-
-      - name: Upload Cypress Videos
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-videos
-          path: cypress/videos
-
-      - name: Upload Cypress Screenshots
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
