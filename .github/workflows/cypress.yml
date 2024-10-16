@@ -36,8 +36,10 @@ jobs:
       - name: Install Cypress binary
         run: npx cypress install  # Install Cypress binary if missing
 
-      - name: Run Cypress Tests
-        run: npx cypress run --browser chrome  # Use Chrome instead of Electron
+      - name: Run Cypress tests
+        env:
+          TERM: xterm  # Setting TERM environment variable
+        run: npx cypress run --headless
 
       - name: Upload Screenshots and Videos
         uses: actions/upload-artifact@v3  # Updated to v3
