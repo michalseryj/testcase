@@ -1,7 +1,9 @@
-export class ProductCatergoryPage extends HomePage {
+import { HomePage } from "./HomePage.po"
+
+export class ProductCategoryPage extends HomePage {
     
-    getSearchButton() {
-        return cy.get('input[name="q"]')
+    getTVSubcategoryButton() {
+        return cy.contains('span.category-tree-title', 'Televize').parents('a')
     }     
 
-    }
+  }

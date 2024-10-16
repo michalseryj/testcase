@@ -5,8 +5,8 @@ const homePage = new HomePage();
 describe('Health check test', () => {
   it('visits the page and verifies its up', () => {
     cy.visit('/');
-    homePage.getSearchButton().should('be.enabled');
-    homePage.getSearchButton().type('test');
+    homePage.getSearchTextField().should('be.enabled');
+    homePage.getSearchTextField().type('test');
     cy.title().should('include', 'DATART');
   });
 });
