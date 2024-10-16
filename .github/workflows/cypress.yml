@@ -6,6 +6,7 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -18,9 +19,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install Cypress
+        run: npx cypress install
+
       - name: Run Cypress tests in Chrome
-        run: xvfb-run cypress run --headed --browser chrome
+        run: xvfb-run npx cypress run --headed --browser chrome
         env:
           TERM: xterm
-          # Include Chrome's specific environment flags for CI
-          CYPRESS_browser: chrome
