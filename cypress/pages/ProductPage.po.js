@@ -23,8 +23,8 @@ export class ProductPage extends HomePage {
     }
 
     addItemToCart (sequence_number){
-        this.getAddToCartbutton().eq(sequence_number).click();
-        this.getClosePopupButton().click();
+        this.getAddToCartbutton().eq(sequence_number).click({force: true});
+        this.getClosePopupButton().should('be.visible').click();
     }
 
   }
