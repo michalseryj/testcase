@@ -17,7 +17,7 @@
 import './commands'
 
 beforeEach(() => {
-    cy.viewport(1280, 720); // Set viewport size globally before each test
+    cy.viewport(1600, 720); // Set viewport size globally before each test
   });
 
 Cypress.on('uncaught:exception', (err, runnable) => {

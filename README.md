@@ -1,15 +1,5 @@
 # Cypress Testing Suite
 
-## Table of Contents
-- [Overview](#overview)
-- [Setup Instructions](#setup-instructions)
-- [Test Execution](#test-execution)
-- [Debugging Tips](#debugging-tips)
-- [Structure and Design](#structure-and-design)
-
-## Overview
-This repository contains end-to-end (E2E) tests for datart web application using Cypress.
-
 ## Setup Instructions
 To get started with the Cypress testing suite, follow these steps:
 clone the repository using:
